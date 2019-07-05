@@ -3,8 +3,7 @@
 
 import speech_recognition as sr
 import subprocess as sp
-from token_folder import IAM_TOKEN
-from token_folder import FOLDER_ID
+from token_folder import IAM_TOKEN, FOLDER_ID, URL
 import json
 import requests
 
@@ -20,7 +19,6 @@ def say(text_to_speech):
 
 
 def recognize(audioData):
-    URL = "https://stt.api.cloud.yandex.net/speech/v1/stt:recognize?"  # API STT - преобразование речи в текст
     headers = {"Authorization": "Bearer " + IAM_TOKEN}
     params = {          # параметры для распознавания речи
         "topic": "general",
@@ -28,8 +26,7 @@ def recognize(audioData):
         "lang": "ru-RU"
     }
     resp = requests.post(URL, params=params, data=audioData, headers=headers)  # получаем расшифровку через запрос requests.post()
-    decoded = resp.content.decode('UTF-8')  # декодируем содержимое расшифровки
-    respDict = json.loads(decoded)  # превращаем json 'string' в python 'dict'
+    respDict = json.loads(resp.content.decode('UTF-8'))  # декодируем содержимое расшифровки -> превращаем json 'string' в python 'dict'
     print(respDict.get('result'))   # рабочий инструмент для проверки, корректно ли исполняется код
     return respDict.get('result')  # def возвращает значение ключа 'result' (т е текст, сгенерированный из речи)
 
