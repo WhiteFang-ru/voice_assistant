@@ -5,5 +5,5 @@ VA состоит из 3х блоков: выяснение потребност
 Используемые технологии:
 - API Yandex SpeechKit (stt & tts) https://cloud.yandex.ru/docs/speechkit/
 - PyPI-библиотека SpeechRecognition (Google SR & IBM SpeechToText)
-- Flask-SQLAlchemy
+- Flask, Flask-SQLAlchemy
 - SQLite (в работе, еще не сделан коммит)
